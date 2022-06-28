@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsk_ui/dummy_data.dart';
 import 'package:gsk_ui/widgets/facebook_post.dart';
-import 'package:gsk_ui/widgets/likes_count_bar.dart';
-import 'package:gsk_ui/widgets/story_widget.dart';
 
-import 'widgets/like_comment_button.dart';
+import 'package:gsk_ui/widgets/story_widget.dart';
 
 class FacebookUi extends StatelessWidget {
   const FacebookUi({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String url = 'assets/images/story1.png';
-    String url2 = 'assets/images/post2.jpg';
-    String url3 = 'assets/images/post1.webp';
-    String url4 = 'assets/images/tree.jpg';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -93,7 +87,6 @@ class FacebookUi extends StatelessWidget {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  
                   children: [
                     StoryWidget(
                       user: posts[0].user!,
