@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class LikesCountBar extends StatelessWidget {
   const LikesCountBar({Key? key}) : super(key: key);
 
@@ -9,26 +8,33 @@ class LikesCountBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
       child: Row(
-        children: const [
-          CircleAvatar(
-            radius: 12,
-            backgroundColor: Colors.blue,
-            child: Icon(
-              Icons.thumb_up,
-              color: Colors.white,
-              size: 10,
-            ),
-          ),
-          Positioned(
-            left: 10,
-            child: CircleAvatar(
-              radius: 12,
-              backgroundColor: Colors.red,
-              child: Icon(
-                Icons.favorite,
-                color: Colors.white,
-                size: 12,
-              ),
+        children: [
+          SizedBox(
+            width: 42,
+            child: Stack(
+              children: const [
+                CircleAvatar(
+                  radius: 10,
+                  backgroundColor: Colors.blue,
+                  child: Icon(
+                    Icons.thumb_up,
+                    color: Colors.white,
+                    size: 10,
+                  ),
+                ),
+                Positioned(
+                  left: 17,
+                  child: CircleAvatar(
+                    radius: 10,
+                    backgroundColor: Colors.red,
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 10,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(

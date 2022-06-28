@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gsk_ui/dummy_data.dart';
 import 'package:gsk_ui/widgets/facebook_post.dart';
 import 'package:gsk_ui/widgets/likes_count_bar.dart';
-import 'package:gsk_ui/widgets/stoty_widget.dart';
+import 'package:gsk_ui/widgets/story_widget.dart';
 
 import 'widgets/like_comment_button.dart';
 
@@ -89,38 +90,46 @@ class FacebookUi extends StatelessWidget {
             ),
             SizedBox(
               height: 200,
-              child: ListView(
+              child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  StoryWidget(
-                    url: url,
-                    isFirst: true,
-                  ),
-                  StoryWidget(
-                    url: url4,
-                    isFirst: false,
-                  ),
-                  StoryWidget(
-                    url: url,
-                    isFirst: false,
-                  ),
-                  StoryWidget(
-                    url: url2,
-                    isFirst: false,
-                  ),
-                  StoryWidget(
-                    url: url3,
-                    isFirst: false,
-                  ),
-                ],
+                child: Row(
+                  
+                  children: [
+                    StoryWidget(
+                      user: posts[0].user!,
+                      post: posts[0].post!,
+                      isFirst: true,
+                    ),
+                    StoryWidget(
+                      user: posts[1].user!,
+                      post: posts[1].post!,
+                      isFirst: false,
+                    ),
+                    StoryWidget(
+                      user: posts[2].user!,
+                      post: posts[2].post!,
+                      isFirst: false,
+                    ),
+                    StoryWidget(
+                      user: posts[3].user!,
+                      post: posts[3].post!,
+                      isFirst: false,
+                    ),
+                    StoryWidget(
+                      user: posts[4].user!,
+                      post: posts[4].post!,
+                      isFirst: false,
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            const FacebookPost(),
-            const LikeAndCommentRow(),
-            const LikesCountBar()
+            ...posts
+                .map((e) => FacebookPost(post: e.post!, user: e.user!))
+                .toList()
           ],
         ),
       ),

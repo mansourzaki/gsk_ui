@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../models/post.dart';
+import '../models/user.dart';
+
 class StoryWidget extends StatelessWidget {
-  final String url;
+  final User user;
+  final Post post;
   bool isFirst;
-  StoryWidget({Key? key, required this.url, required this.isFirst})
+  StoryWidget(
+      {Key? key, required this.user, required this.isFirst, required this.post})
       : super(key: key);
 
   @override
@@ -14,8 +19,8 @@ class StoryWidget extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                url,
+              child: Image.network(
+                post.image!,
                 width: 120,
                 height: 200,
                 fit: BoxFit.cover,
@@ -27,8 +32,7 @@ class StoryWidget extends StatelessWidget {
                   backgroundColor: Colors.white,
                   radius: 12,
                   child: isFirst ? Icon(Icons.add) : null,
-                  backgroundImage:
-                      !isFirst ? AssetImage('assets/images/putin.jpg') : null),
+                  backgroundImage: !isFirst ? NetworkImage(post.image!) : null),
             )
           ],
         ));
