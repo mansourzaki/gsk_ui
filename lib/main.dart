@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gsk_ui/facebook_ui.dart';
-import 'package:gsk_ui/facebook_ui2.dart';
+
+import 'package:gsk_ui/instgram_ui.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: FacebookUi2(),
+    home: InstgramUi(),
   ));
 }
