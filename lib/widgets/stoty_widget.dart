@@ -11,6 +11,7 @@ class StoryWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
+          
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
@@ -25,7 +26,7 @@ class StoryWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
                   backgroundColor: Colors.white,
-                  radius: 12,
+                  radius: 15,
                   child: isFirst ? Icon(Icons.add) : null,
                   backgroundImage:
                       !isFirst ? AssetImage('assets/images/putin.jpg') : null),
