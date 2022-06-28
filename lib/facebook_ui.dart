@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsk_ui/dummy_data.dart';
 import 'package:gsk_ui/widgets/facebook_post.dart';
+import 'package:gsk_ui/widgets/stories_topbar.dart';
 
 import 'package:gsk_ui/widgets/story_widget.dart';
 
@@ -51,80 +52,46 @@ class FacebookUi extends StatelessWidget {
             ),
           )
         ],
+        // bottom: const PreferredSize(
+        //     preferredSize: Size.fromHeight(30), child: StoriesTopBar()),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Stories',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        textBaseline: TextBaseline.alphabetic),
-                  ),
-                  const Spacer(),
-                  RichText(
-                      text: const TextSpan(children: [
-                    TextSpan(
-                      text: 'See Archive',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w400),
-                    ),
-                    WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Icon(Icons.navigate_next_outlined),
-                        style: TextStyle()),
-                  ])),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 200,
-              child: SingleChildScrollView(
+      body: ListView(
+        children: [
+          const StoriesTopBar(),
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    StoryWidget(
-                      user: posts[0].user!,
-                      post: posts[0].post!,
-                      isFirst: true,
-                    ),
-                    StoryWidget(
-                      user: posts[1].user!,
-                      post: posts[1].post!,
-                      isFirst: false,
-                    ),
-                    StoryWidget(
-                      user: posts[2].user!,
-                      post: posts[2].post!,
-                      isFirst: false,
-                    ),
-                    StoryWidget(
-                      user: posts[3].user!,
-                      post: posts[3].post!,
-                      isFirst: false,
-                    ),
-                    StoryWidget(
-                      user: posts[4].user!,
-                      post: posts[4].post!,
-                      isFirst: false,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ...posts
-                .map((e) => FacebookPost(post: e.post!, user: e.user!))
-                .toList()
-          ],
-        ),
+                itemCount: posts.length,
+                itemBuilder: (context, i) {
+                  if (i == 0) {
+                    return StoryWidget(
+                        user: posts[i].user!,
+                        isFirst: true,
+                        post: posts[i].post!);
+                  } else {
+                    return StoryWidget(
+                        user: posts[i].user!,
+                        isFirst: false,
+                        post: posts[i].post!);
+                  }
+                }),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+
+          ListView.builder(
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              itemCount: posts.length,
+              itemBuilder: (context, i) =>
+                  FacebookPost(post: posts[i].post!, user: posts[i].user!)),
+
+          // ...posts
+          //     .map((e) => FacebookPost(post: e.post!, user: e.user!))
+          //     .toList()
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

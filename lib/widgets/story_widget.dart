@@ -29,10 +29,11 @@ class StoryWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 12,
-                  child: isFirst ? Icon(Icons.add) : null,
-                  backgroundImage: !isFirst ? NetworkImage(post.image!) : null),
+                backgroundColor: Colors.white,
+                radius: 12,
+                backgroundImage: !isFirst ? NetworkImage(post.image!) : null,
+                child: isFirst ? const Icon(Icons.add) : null,
+              ),
             )
           ],
         ));
