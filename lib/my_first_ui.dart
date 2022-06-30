@@ -14,6 +14,9 @@ class MyFirstUi extends StatelessWidget {
               UserAccountsDrawerHeader(
                 accountName: Text('Mahmoud'),
                 accountEmail: Text('ali@gmail.com'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/putin.jpg'),
+                ),
               ),
               ListTile(
                 leading: Icon(Icons.home),
