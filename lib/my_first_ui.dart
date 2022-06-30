@@ -8,81 +8,120 @@ class MyFirstUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('First Screen')),
-        drawer: Drawer(
-          child: Column(
-            children: const [
-              UserAccountsDrawerHeader(
-                accountName: Text('Mahmoud'),
-                accountEmail: Text('ali@gmail.com'),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/putin.jpg'),
-                ),
+        drawer: MediaQuery.of(context).orientation == Orientation.landscape
+            ? null
+            : Drawer(
+                child: _buildDrawerContents(),
               ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Home'),
-                trailing: Icon(Icons.arrow_forward_ios),
-                subtitle: Text('Go to home'),
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite),
-                title: Text('Home'),
-                trailing: Icon(Icons.arrow_forward_ios),
-                subtitle: Text('Go to favorites'),
-              ),
-              ListTile(
-                leading: Icon(Icons.perm_identity),
-                title: Text('My Profile'),
-                trailing: Icon(Icons.arrow_forward_ios),
-                subtitle: Text('Go to profile'),
-              ),
-            ],
+        body: MediaQuery.of(context).orientation == Orientation.landscape
+            ? _buildLandscapeWidget()
+            : const Center(
+                child: Text('Center text'),
+              ));
+  }
+
+  Row _buildLandscapeWidget() {
+    return Row(
+      children: [
+        _buildDrawerContents(),
+        _buildSeconSection(),
+      ],
+    );
+  }
+
+  Widget _buildSeconSection() {
+    return Expanded(
+      child: ListView(
+        shrinkWrap: true,
+        children: const [
+          Center(
+            child: Text('Center Text'),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawerContents() {
+    return Expanded(
+      child: ListView(
+        shrinkWrap: true,
+        children: const [
+          UserAccountsDrawerHeader(
+            accountName: Text('Mahmoud'),
+            accountEmail: Text('ali@gmail.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/putin.jpg'),
+            ),
           ),
-        ),
-        body: Center(
-          child: Column(
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            trailing: Icon(Icons.arrow_forward_ios),
+            subtitle: Text('Go to home'),
+          ),
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text('Home'),
+            trailing: Icon(Icons.arrow_forward_ios),
+            subtitle: Text('Go to favorites'),
+          ),
+          ListTile(
+            leading: Icon(Icons.perm_identity),
+            title: Text('My Profile'),
+            trailing: Icon(Icons.arrow_forward_ios),
+            subtitle: Text('Go to profile'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Center _centerWidger() {
+    return Center(
+      child: Column(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
+              Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            width: 150,
-                            height: 200,
-                            child: Image.network(
-                              url,
-                            )),
-                      ),
-                      const Text('test')
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                        width: 150,
+                        height: 200,
+                        child: Image.network(
+                          url,
+                        )),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            width: 150,
-                            height: 200,
-                            child: Image.network(
-                              url,
-                            )),
-                      ),
-                      const Text('test')
-                    ],
-                  ),
+                  const Text('test')
                 ],
               ),
-              SizedBox(
-                height: 150,
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                        width: 150,
+                        height: 200,
+                        child: Image.network(
+                          url,
+                        )),
+                  ),
+                  const Text('test')
+                ],
               ),
-              Text('Test')
             ],
           ),
-        ));
+          SizedBox(
+            height: 150,
+          ),
+          Text('Test')
+        ],
+      ),
+    );
   }
 }
