@@ -28,7 +28,7 @@ class FacebookUi extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.grey[200],
                 prefixIcon: const Icon(Icons.search),
-                hintText: 'Search',
+                hintText: 'test',
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(100),
@@ -58,8 +58,8 @@ class FacebookUi extends StatelessWidget {
       body: ListView(
         children: [
           const StoriesTopBar(),
-          SizedBox(
-            height: 200,
+          SizedBox( 
+            height: MediaQuery.of(context).size.height/4,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: posts.length,
