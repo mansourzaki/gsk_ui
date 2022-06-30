@@ -8,6 +8,34 @@ class MyFirstUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('First Screen')),
+        drawer: Drawer(
+          child: Column(
+            children: const [
+              UserAccountsDrawerHeader(
+                accountName: Text('Mahmoud'),
+                accountEmail: Text('ali@gmail.com'),
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Home'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                subtitle: Text('Go to home'),
+              ),
+              ListTile(
+                leading: Icon(Icons.favorite),
+                title: Text('Home'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                subtitle: Text('Go to favorites'),
+              ),
+              ListTile(
+                leading: Icon(Icons.perm_identity),
+                title: Text('My Profile'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                subtitle: Text('Go to profile'),
+              ),
+            ],
+          ),
+        ),
         body: Center(
           child: Column(
             children: [
@@ -46,7 +74,9 @@ class MyFirstUi extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 150,),
+              SizedBox(
+                height: 150,
+              ),
               Text('Test')
             ],
           ),
