@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gsk_ui/models/mythemes.dart';
+import 'package:gsk_ui/widgets/drawer_widget.dart';
 
 class MyFirstScreen extends StatefulWidget {
-  const MyFirstScreen({Key? key}) : super(key: key);
+  Function changeTheme;
+  bool isDark;
+  MyFirstScreen({Key? key, required this.changeTheme, required this.isDark})
+      : super(key: key);
 
   @override
   State<MyFirstScreen> createState() => _MyFirstScreenState();
@@ -9,23 +14,38 @@ class MyFirstScreen extends StatefulWidget {
 
 class _MyFirstScreenState extends State<MyFirstScreen> {
   String content = 'Press the button below';
-  Color _color = Colors.black;
+  Color _color = Colors.white;
   int index = 0;
+  //bool isEnabled = false;
+  // ThemeData theme = light();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _color,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(''),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SwitchListTile(
+            value: widget.isDark,
+            onChanged: (value) {
+              widget.changeTheme(value);
+            },
+            title: Text(
+              widget.isDark ? 'ON' : 'OFF',
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          Spacer(),
           Text(
             content,
             textAlign: TextAlign.center,
-            style: TextStyle(
-                color: _color == Colors.black ? Colors.white : Colors.black),
+            style: TextStyle(color: Colors.black),
           ),
+          Spacer(),
           // ElevatedButton(
           //     onPressed: () {
           //       _color = _color == Colors.white ? Colors.black : Colors.white;
@@ -33,6 +53,9 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
           //     },
           //     child: const Text('Change color'))
         ],
+      ),
+      drawer: Drawer(
+        child: drawerContents(),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
@@ -45,17 +68,67 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
             } else {
               content = 'Profile';
             }
-            setState(() {
-              
-            });
+            setState(() {});
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.favorite), label: 'Favorite'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.perm_identity), label: 'Profile'),
           ]),
+    );
+  }
+
+  Widget drawerContents() {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        const UserAccountsDrawerHeader(
+          accountName: Text('Mahmoud'),
+          accountEmail: Text('ali@gmail.com'),
+          currentAccountPicture: CircleAvatar(
+            backgroundImage: AssetImage('assets/images/putin.jpg'),
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home),
+          title: const Text('Home'),
+          onTap: () {
+            index = 0;
+            content = 'Home';
+
+            Navigator.pop(context);
+            setState(() {});
+          },
+          trailing: const Icon(Icons.arrow_forward_ios),
+          subtitle: const Text('Go to home'),
+        ),
+        ListTile(
+          leading: const Icon(Icons.favorite),
+          title: const Text('Favorite'),
+          onTap: () {
+            index = 1;
+            content = 'Favorite';
+            setState(() {});
+            Navigator.pop(context);
+          },
+          trailing: const Icon(Icons.arrow_forward_ios),
+          subtitle: const Text('Go to favorites'),
+        ),
+        ListTile(
+          leading: const Icon(Icons.perm_identity),
+          title: const Text('My Profile'),
+          onTap: () {
+            index = 2;
+            content = 'Profile';
+            Navigator.pop(context);
+            setState(() {});
+          },
+          trailing: const Icon(Icons.arrow_forward_ios),
+          subtitle: const Text('Go to profile'),
+        ),
+      ],
     );
   }
 }
