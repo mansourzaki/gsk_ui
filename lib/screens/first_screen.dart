@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class MyFirstScreen extends StatefulWidget {
   const MyFirstScreen({Key? key}) : super(key: key);
@@ -12,6 +10,7 @@ class MyFirstScreen extends StatefulWidget {
 class _MyFirstScreenState extends State<MyFirstScreen> {
   String content = 'Press the button below';
   Color _color = Colors.black;
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +26,36 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
             style: TextStyle(
                 color: _color == Colors.black ? Colors.white : Colors.black),
           ),
-          ElevatedButton(
-              onPressed: () {
-                _color = _color == Colors.white ? Colors.black : Colors.white;
-                setState(() {});
-              },
-              child: const Text('Change color'))
+          // ElevatedButton(
+          //     onPressed: () {
+          //       _color = _color == Colors.white ? Colors.black : Colors.white;
+          //       setState(() {});
+          //     },
+          //     child: const Text('Change color'))
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: index,
+          onTap: (i) {
+            index = i;
+            if (i == 0) {
+              content = 'Home';
+            } else if (i == 1) {
+              content = 'Favorite';
+            } else {
+              content = 'Profile';
+            }
+            setState(() {
+              
+            });
+          },
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite), label: 'Favorite'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.perm_identity), label: 'Profile'),
+          ]),
     );
   }
 }
