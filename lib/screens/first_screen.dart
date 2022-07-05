@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gsk_ui/models/mythemes.dart';
+import 'package:gsk_ui/screens/favorite_screen.dart';
+import 'package:gsk_ui/screens/home_screen.dart';
+import 'package:gsk_ui/screens/profile_screen.dart';
 import 'package:gsk_ui/widgets/drawer_widget.dart';
 
 class MyFirstScreen extends StatefulWidget {
@@ -16,67 +19,92 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
   String content = 'Press the button below';
   Color _color = Colors.white;
   int index = 0;
+
   //bool isEnabled = false;
   // ThemeData theme = light();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _color,
-      appBar: AppBar(
-        title: Text(''),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SwitchListTile(
-            value: widget.isDark,
-            onChanged: (value) {
-              widget.changeTheme(value);
-            },
-            title: Text(
-              widget.isDark ? 'ON' : 'OFF',
-              style: TextStyle(color: Colors.black),
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 3,
+      child: Scaffold(
+        backgroundColor: _color,
+        appBar: AppBar(
+          bottom: const TabBar(tabs: [
+            Tab(
+              child: Text('Home'),
             ),
-          ),
-          Spacer(),
-          Text(
-            content,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black),
-          ),
-          Spacer(),
-          // ElevatedButton(
-          //     onPressed: () {
-          //       _color = _color == Colors.white ? Colors.black : Colors.white;
-          //       setState(() {});
-          //     },
-          //     child: const Text('Change color'))
-        ],
-      ),
-      drawer: Drawer(
-        child: drawerContents(),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: index,
-          onTap: (i) {
-            index = i;
-            if (i == 0) {
-              content = 'Home';
-            } else if (i == 1) {
-              content = 'Favorite';
-            } else {
-              content = 'Profile';
-            }
-            setState(() {});
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'Favorite'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.perm_identity), label: 'Profile'),
+            Tab(
+              child: Text('Favorite'),
+            ),
+            Tab(
+              child: Text('Profile'),
+            ),
           ]),
+        ),
+        body: TabBarView(
+          children: [
+            HomeScreen(),
+            FavoriteScreen(),
+            ProfileScreen(),
+          ],
+        ),
+        drawer: Drawer(
+          child: drawerContents(),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: index,
+            onTap: (i) {
+              index = i;
+              if (i == 0) {
+                content = 'Home';
+              } else if (i == 1) {
+                content = 'Favorite';
+              } else {
+                content = 'Profile';
+              }
+              setState(() {});
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite), label: 'Favorite'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.perm_identity), label: 'Profile'),
+            ]),
+      ),
+    );
+  }
+
+  Widget _buildColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SwitchListTile(
+          value: widget.isDark,
+          onChanged: (value) {
+            widget.changeTheme(value);
+          },
+          title: Text(
+            widget.isDark ? 'ON' : 'OFF',
+            style: const TextStyle(color: Colors.black),
+          ),
+        ),
+        const Spacer(),
+        Text(
+          content,
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: Colors.black),
+        ),
+        const Spacer(),
+        // ElevatedButton(
+        //     onPressed: () {
+        //       _color = _color == Colors.white ? Colors.black : Colors.white;
+        //       setState(() {});
+        //     },
+        //     child: const Text('Change color'))
+      ],
     );
   }
 

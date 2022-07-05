@@ -3,7 +3,7 @@ import 'package:gsk_ui/screens/first_screen.dart';
 
 void main() {
   runApp(
-    MyApp(),
+     MyApp(),
   );
 }
 
