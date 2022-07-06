@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsk_ui/data/dummy_data.dart';
 import 'package:gsk_ui/models/mythemes.dart';
 import 'package:gsk_ui/screens/favorite_screen.dart';
 import 'package:gsk_ui/screens/home_screen.dart';
@@ -19,6 +20,11 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
   String content = 'Press the button below';
   Color _color = Colors.white;
   int index = 0;
+  likeNews(newModel) {
+    int index = newsList.indexOf(newModel);
+    newsList[index].isFavorite = !newsList[index].isFavorite;
+    setState(() {});
+  }
 
   //bool isEnabled = false;
   // ThemeData theme = light();
@@ -30,6 +36,15 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
       child: Scaffold(
         backgroundColor: _color,
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(Icons.sunny),
+              onPressed: () {
+                widget.changeTheme(!widget.isDark);
+                setState(() {});
+              },
+            )
+          ],
           bottom: const TabBar(tabs: [
             Tab(
               child: Text('Home'),
