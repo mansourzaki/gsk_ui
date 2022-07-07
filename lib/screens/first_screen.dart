@@ -3,8 +3,9 @@ import 'package:gsk_ui/data/dummy_data.dart';
 import 'package:gsk_ui/models/mythemes.dart';
 import 'package:gsk_ui/screens/favorite_screen.dart';
 import 'package:gsk_ui/screens/home_screen.dart';
-import 'package:gsk_ui/screens/profile_screen.dart';
+import 'package:gsk_ui/screens/contact_us.dart';
 import 'package:gsk_ui/widgets/drawer_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyFirstScreen extends StatefulWidget {
   Function changeTheme;
@@ -53,7 +54,7 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
               child: Text('Favorite'),
             ),
             Tab(
-              child: Text('Profile'),
+              child: Text('Contact Us'),
             ),
           ]),
         ),
@@ -61,7 +62,7 @@ class _MyFirstScreenState extends State<MyFirstScreen> {
           children: [
             HomeScreen(),
             FavoriteScreen(),
-            ProfileScreen(),
+            ContactUsScreen(),
           ],
         ),
         drawer: Drawer(

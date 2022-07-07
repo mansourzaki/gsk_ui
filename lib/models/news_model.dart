@@ -5,6 +5,7 @@ class NewsModel {
   String? description;
   String? content;
   String? imageUrl;
+  String? url;
   late bool isFavorite;
 
   NewsModel(
@@ -14,6 +15,7 @@ class NewsModel {
       required this.title,
       required this.content,
       required this.imageUrl,
+      required this.url,
       this.isFavorite = false});
 
   NewsModel.fromJson(Map<String, dynamic> data) {
@@ -23,6 +25,7 @@ class NewsModel {
     title = data['title'];
     content = data['content'];
     imageUrl = data['urlToImage'];
+    url = data['url'];
     isFavorite = false;
   }
 }
