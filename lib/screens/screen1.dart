@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsk_ui/router.dart';
 import 'package:gsk_ui/screens/screen2.dart';
 
 class Screen1 extends StatefulWidget {
@@ -33,8 +34,9 @@ class _Screen1State extends State<Screen1> {
           ),
           ElevatedButton(
               onPressed: () async {
-                x = await Navigator.pushNamed(context, Screen2.routeName,
-                    arguments: _controller.text);
+                // x = await Navigator.pushNamed(context, Screen2.routeName,
+                //     arguments: _controller.text);
+                AppRouter.NavigateTo(Screen2(name: ''));
                 setState(() {});
               },
               child: Text('Go to Screen2')),
