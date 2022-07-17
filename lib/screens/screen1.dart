@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gsk_ui/widgets/screen2.dart';
+import 'package:gsk_ui/screens/screen2.dart';
 
 class Screen1 extends StatefulWidget {
   Screen1({Key? key}) : super(key: key);

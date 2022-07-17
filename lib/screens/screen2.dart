@@ -3,12 +3,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Screen2 extends StatelessWidget {
-  const Screen2({Key? key}) : super(key: key);
+  final String name;
+  const Screen2({Key? key, required this.name}) : super(key: key);
   static const routeName = 'Screen2';
 
   @override
   Widget build(BuildContext context) {
-    dynamic name = ModalRoute.of(context)!.settings.arguments as String;
+   // dynamic name = ModalRoute.of(context)!.settings.arguments as String;
     return WillPopScope(
       onWillPop: () {
         if (Navigator.canPop(context)) {
